@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BikeDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bike">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TipId" Type="int" />
+          <Property Name="MarkaId" Type="int" />
+          <Property Name="ResimId" Type="int" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fiyat" Type="int" />
+          <Property Name="Skor" Type="int" />
+          <Property Name="Tarih" Type="int" />
+          <Property Name="Hiz" Type="int" />
+        </EntityType>
+        <EntityType Name="Hak">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="50" />
+          <Property Name="İcerik" Type="text" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tel" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pass" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tarih" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Marka">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ResimData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResimId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Path" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Bike_Marka1">
+          <End Role="Marka" Type="Self.Marka" Multiplicity="0..1" />
+          <End Role="Bike" Type="Self.Bike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marka">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bike">
+              <PropertyRef Name="MarkaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bike_Tip1">
+          <End Role="Tip" Type="Self.Tip" Multiplicity="0..1" />
+          <End Role="Bike" Type="Self.Bike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bike">
+              <PropertyRef Name="TipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BikeDBStoreContainer">
+          <EntitySet Name="Bike" EntityType="Self.Bike" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hak" EntityType="Self.Hak" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marka" EntityType="Self.Marka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResimData" EntityType="Self.ResimData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tip" EntityType="Self.Tip" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Bike_Marka1" Association="Self.FK_Bike_Marka1">
+            <End Role="Marka" EntitySet="Marka" />
+            <End Role="Bike" EntitySet="Bike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bike_Tip1" Association="Self.FK_Bike_Tip1">
+            <End Role="Tip" EntitySet="Tip" />
+            <End Role="Bike" EntitySet="Bike" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BikeDB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bike">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TipId" Type="Int32" />
+          <Property Name="MarkaId" Type="Int32" />
+          <Property Name="ResimId" Type="Int32" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fiyat" Type="Int32" />
+          <Property Name="Skor" Type="Int32" />
+          <Property Name="Tarih" Type="Int32" />
+          <Property Name="Hiz" Type="Int32" />
+          <NavigationProperty Name="Marka" Relationship="Self.FK_Bike_Marka1" FromRole="Bike" ToRole="Marka" />
+          <NavigationProperty Name="Tip" Relationship="Self.FK_Bike_Tip1" FromRole="Bike" ToRole="Tip" />
+        </EntityType>
+        <EntityType Name="Hak">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Baslik" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="İcerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tarih" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Marka">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bike" Relationship="Self.FK_Bike_Marka1" FromRole="Marka" ToRole="Bike" />
+        </EntityType>
+        <EntityType Name="Tip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bike" Relationship="Self.FK_Bike_Tip1" FromRole="Tip" ToRole="Bike" />
+        </EntityType>
+        <Association Name="FK_Bike_Marka1">
+          <End Role="Marka" Type="Self.Marka" Multiplicity="0..1" />
+          <End Role="Bike" Type="Self.Bike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marka">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bike">
+              <PropertyRef Name="MarkaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bike_Tip1">
+          <End Role="Tip" Type="Self.Tip" Multiplicity="0..1" />
+          <End Role="Bike" Type="Self.Bike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bike">
+              <PropertyRef Name="TipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BikeDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bike" EntityType="Self.Bike" />
+          <EntitySet Name="Hak" EntityType="Self.Hak" />
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" />
+          <EntitySet Name="Marka" EntityType="Self.Marka" />
+          <EntitySet Name="Tip" EntityType="Self.Tip" />
+          <AssociationSet Name="FK_Bike_Marka1" Association="Self.FK_Bike_Marka1">
+            <End Role="Marka" EntitySet="Marka" />
+            <End Role="Bike" EntitySet="Bike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bike_Tip1" Association="Self.FK_Bike_Tip1">
+            <End Role="Tip" EntitySet="Tip" />
+            <End Role="Bike" EntitySet="Bike" />
+          </AssociationSet>
+          <EntitySet Name="ResimDatas" EntityType="BikeDB.ResimData" />
+        </EntityContainer>
+        <EntityType Name="ResimData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResimId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BikeDBStoreContainer" CdmEntityContainer="BikeDBEntities">
+          <EntitySetMapping Name="Bike">
+            <EntityTypeMapping TypeName="BikeDB.Bike">
+              <MappingFragment StoreEntitySet="Bike">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TipId" ColumnName="TipId" />
+                <ScalarProperty Name="MarkaId" ColumnName="MarkaId" />
+                <ScalarProperty Name="ResimId" ColumnName="ResimId" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="Skor" ColumnName="Skor" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Hiz" ColumnName="Hiz" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hak">
+            <EntityTypeMapping TypeName="BikeDB.Hak">
+              <MappingFragment StoreEntitySet="Hak">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="İcerik" ColumnName="İcerik" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanici">
+            <EntityTypeMapping TypeName="BikeDB.Kullanici">
+              <MappingFragment StoreEntitySet="Kullanici">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marka">
+            <EntityTypeMapping TypeName="BikeDB.Marka">
+              <MappingFragment StoreEntitySet="Marka">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tip">
+            <EntityTypeMapping TypeName="BikeDB.Tip">
+              <MappingFragment StoreEntitySet="Tip">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResimDatas">
+            <EntityTypeMapping TypeName="BikeDB.ResimData">
+              <MappingFragment StoreEntitySet="ResimData">
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ResimId" ColumnName="ResimId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

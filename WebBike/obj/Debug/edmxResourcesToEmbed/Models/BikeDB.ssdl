@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BikeDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bike">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="TipId" Type="int" />
+    <Property Name="MarkaId" Type="int" />
+    <Property Name="ResimId" Type="int" />
+    <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fiyat" Type="int" />
+    <Property Name="Skor" Type="int" />
+    <Property Name="Tarih" Type="int" />
+    <Property Name="Hiz" Type="int" />
+  </EntityType>
+  <EntityType Name="Hak">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Baslik" Type="nvarchar" MaxLength="50" />
+    <Property Name="İcerik" Type="text" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tel" Type="nvarchar" MaxLength="50" />
+    <Property Name="Adress" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Kullanici">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+    <Property Name="Pass" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tarih" Type="int" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Marka">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ResimData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ResimId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Path" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Tip">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Bike_Marka1">
+    <End Role="Marka" Type="Self.Marka" Multiplicity="0..1" />
+    <End Role="Bike" Type="Self.Bike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marka">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bike">
+        <PropertyRef Name="MarkaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bike_Tip1">
+    <End Role="Tip" Type="Self.Tip" Multiplicity="0..1" />
+    <End Role="Bike" Type="Self.Bike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tip">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bike">
+        <PropertyRef Name="TipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BikeDBStoreContainer">
+    <EntitySet Name="Bike" EntityType="Self.Bike" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hak" EntityType="Self.Hak" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Marka" EntityType="Self.Marka" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResimData" EntityType="Self.ResimData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tip" EntityType="Self.Tip" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Bike_Marka1" Association="Self.FK_Bike_Marka1">
+      <End Role="Marka" EntitySet="Marka" />
+      <End Role="Bike" EntitySet="Bike" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bike_Tip1" Association="Self.FK_Bike_Tip1">
+      <End Role="Tip" EntitySet="Tip" />
+      <End Role="Bike" EntitySet="Bike" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

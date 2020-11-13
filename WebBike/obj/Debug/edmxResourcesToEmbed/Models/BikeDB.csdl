@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BikeDB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Bike">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="TipId" Type="Int32" />
+    <Property Name="MarkaId" Type="Int32" />
+    <Property Name="ResimId" Type="Int32" />
+    <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fiyat" Type="Int32" />
+    <Property Name="Skor" Type="Int32" />
+    <Property Name="Tarih" Type="Int32" />
+    <Property Name="Hiz" Type="Int32" />
+    <NavigationProperty Name="Marka" Relationship="Self.FK_Bike_Marka1" FromRole="Bike" ToRole="Marka" />
+    <NavigationProperty Name="Tip" Relationship="Self.FK_Bike_Tip1" FromRole="Bike" ToRole="Tip" />
+  </EntityType>
+  <EntityType Name="Hak">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Baslik" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="İcerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Kullanici">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Pass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tarih" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Marka">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Bike" Relationship="Self.FK_Bike_Marka1" FromRole="Marka" ToRole="Bike" />
+  </EntityType>
+  <EntityType Name="Tip">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Bike" Relationship="Self.FK_Bike_Tip1" FromRole="Tip" ToRole="Bike" />
+  </EntityType>
+  <Association Name="FK_Bike_Marka1">
+    <End Role="Marka" Type="Self.Marka" Multiplicity="0..1" />
+    <End Role="Bike" Type="Self.Bike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marka">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bike">
+        <PropertyRef Name="MarkaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bike_Tip1">
+    <End Role="Tip" Type="Self.Tip" Multiplicity="0..1" />
+    <End Role="Bike" Type="Self.Bike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tip">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bike">
+        <PropertyRef Name="TipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BikeDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Bike" EntityType="Self.Bike" />
+    <EntitySet Name="Hak" EntityType="Self.Hak" />
+    <EntitySet Name="Kullanici" EntityType="Self.Kullanici" />
+    <EntitySet Name="Marka" EntityType="Self.Marka" />
+    <EntitySet Name="Tip" EntityType="Self.Tip" />
+    <AssociationSet Name="FK_Bike_Marka1" Association="Self.FK_Bike_Marka1">
+      <End Role="Marka" EntitySet="Marka" />
+      <End Role="Bike" EntitySet="Bike" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bike_Tip1" Association="Self.FK_Bike_Tip1">
+      <End Role="Tip" EntitySet="Tip" />
+      <End Role="Bike" EntitySet="Bike" />
+    </AssociationSet>
+    <EntitySet Name="ResimDatas" EntityType="BikeDB.ResimData" />
+  </EntityContainer>
+  <EntityType Name="ResimData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResimId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Path" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

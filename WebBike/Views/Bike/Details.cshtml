@@ -1,0 +1,117 @@
+﻿@model WebBike.Models.Bike
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href="~/Content/BikeProfile.css" rel="stylesheet" />
+<div class="header" style="text-align:left">
+    <h1>@Model.Tip.Ad</h1>
+    <h4>@Model.Marka.Ad</h4>
+</div>
+<div class="row">
+    <div class="col-md-6 ">
+        <div class="tile">
+            <div class="wrapper" >
+                <div class="header">@Html.DisplayFor(model => model.Ad)</div>
+
+                @using (Html.BeginForm("Upload", "Bike", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="hidden" id="txt_id" name="Id" value="@Model.Id"/>
+                    <input type="hidden" id="txt_name" name="Name" value="@Model.Marka.Ad"/>
+
+                <div style="text-align:center;"> <img id="user_img" height="300" width="500" src="~/Resim/@ViewBag.Resim"/> </div>
+                <div style="float: right;  margin-top:13px; margin-bottom:20px;">
+                    <input type="file" title="search image" id="file" name="file" onchange="show(this)" />
+                </div>
+
+                <div style="float: left;  margin-top:13px; margin-bottom:20px; margin-left:20px;">
+                        <input type="submit" title="save" />
+                </div>
+
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 ">
+        <div class="stats">
+            <div class="left">
+                @Html.DisplayNameFor(model => model.Tip) :
+            </div>
+            <div class="right">
+                @Html.DisplayFor(model => model.Tip.Ad)
+            </div>
+        </div>
+        <div class="stats">
+            <div class="left">
+                @Html.DisplayNameFor(model => model.Marka) :
+            </div>
+            <div class="right">
+                @Html.DisplayFor(model => model.Marka.Ad)
+            </div>
+        </div>
+        <div class="stats">
+            <div class="left">
+
+                @Html.DisplayNameFor(model => model.Ad) :
+            </div>
+            <div class="right">
+                @Html.DisplayFor(model => model.Ad)
+            </div>
+        </div>
+        <div class="stats">
+            <div class="left">
+
+                @Html.DisplayNameFor(model => model.Fiyat) :
+            </div>
+            <div class="right">
+                @Html.DisplayFor(model => model.Fiyat)
+            </div>
+        </div>
+        <div class="stats">
+            <div class="left">
+
+                @Html.DisplayNameFor(model => model.Skor) :
+            </div>
+            <div class="right">
+                @Html.DisplayFor(model => model.Skor)
+            </div>
+        </div>
+        <div class="stats">
+            <div class="left">
+
+                @Html.DisplayNameFor(model => model.Tarih) :
+            </div>
+            <div class="right">
+                @Html.DisplayFor(model => model.Tarih)
+            </div>
+        </div>
+        <div class="stats">
+            <div class="left">
+                @Html.DisplayNameFor(model => model.Hiz) :
+            </div>
+            <div class="right">
+                @Html.DisplayFor(model => model.Hiz)
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts{
+
+
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript">
+        function show(input) {
+            if (input.files && input.files[0]) {
+                var filerdr = new FileReader();
+                filerdr.onload = function (e) {
+                    $('#user_img').attr('src', e.target.result);
+                }
+                filerdr.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}

@@ -1,0 +1,85 @@
+﻿@model IEnumerable<WebBike.Models.Bike>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered" id="projetablosu">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Id)</th>
+                    <th>@Html.DisplayNameFor(model => model.Tip)</th>
+                    <th>@Html.DisplayNameFor(model => model.Marka)</th>
+                    <th>@Html.DisplayNameFor(model => model.Ad)</th>
+                    <th>@Html.DisplayNameFor(model => model.Fiyat)</th>
+                    <th>@Html.DisplayNameFor(model => model.Skor)</th>
+                    <th>@Html.DisplayNameFor(model => model.Tarih)</th>
+                    <th>@Html.DisplayNameFor(model => model.Hiz)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tip.Ad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Marka.Ad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fiyat)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Skor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tarih)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Hiz)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+
+@section Scripts{
+      
+    
+<script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="~/vendor/datatables/dataTables.buttons.min.js"></script>
+<script src="~/vendor/datatables/buttons.flash.min.js"></script>
+<script src="~/vendor/datatables/buttons.html5.min.js"></script>
+<script src="~/vendor/datatables/buttons.print.min.js"></script>
+<script src="~/vendor/datatables/jszip.min.js"></script>
+<script src="~/vendor/datatables/pdfmake.min.js"></script>
+<script src="~/vendor/datatables/vfs_fonts.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#projetablosu').DataTable();
+    });
+
+</script>
+
+}
